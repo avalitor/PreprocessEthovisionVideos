@@ -2,23 +2,24 @@
 """
 Created on Wed Jun 15 16:56:05 2022
 
-Automatically crop videos based on LED turning on
+Automatically trim videos based on LED turning on
 
 @author: kxu013
 """
-
+import os
 import  moviepy.editor as mpy
 from modules.config import RAW_FILE_DIR, PROCESSED_FILE_DIR
 
 
-def edit_video(loadtitle, savetitle, cuts):
+def edit_video(loadtitle, cuts):
     # load file
     video = mpy.VideoFileClip(loadtitle)
 
     # cut file
     clips = []
     for cut in cuts:
-        clip = video.subclip(cut[0], cut[1])
+        try: clip = video.subclip(cut[0], cut[1]) #check if there are multiple cuts
+        except: clip = video.subclip(cut)
         clips.append(clip)
 
     final_clip = mpy.concatenate_videoclips(clips) #combine all clippings
@@ -35,7 +36,8 @@ def edit_video(loadtitle, savetitle, cuts):
     # final_clip = mpy.CompositeVideoClip([final_clip, txt])
 
     # save file
-    final_clip.write_videofile(savetitle, threads=20, fps=30,
+    savetitle = os.path.join(PROCESSED_FILE_DIR, os.path.basename(loadtitle).split('.')[0] + '.mp4')
+    final_clip.write_videofile(savetitle, threads=20,
                                codec = 'libx264', #default is libx264 for mp4, or png for avi
                                audio = False,
                                preset = 'slow', #this does not affect video quality, just video size. slower = smaller file
@@ -45,11 +47,9 @@ def edit_video(loadtitle, savetitle, cuts):
 
 
 if __name__ == '__main__':    
-    title = "LED_test1"
-    loadtitle = RAW_FILE_DIR + '/' + title + '.avi'
-    savetitle = PROCESSED_FILE_DIR + '/' + title + '.mp4'
+    loadtitle = RAW_FILE_DIR+"/LED_test1.avi"
     
     # modify these start and end times for your subclips, unit is seconds
     cuts = [('3', '10')]
     
-    edit_video(loadtitle, savetitle, cuts)
+    edit_video(loadtitle, cuts)
