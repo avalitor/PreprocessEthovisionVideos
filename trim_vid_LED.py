@@ -14,20 +14,22 @@ from modules.config import RAW_FILE_DIR
 '''
 cut single video
 '''
-# coord = [621, 93]
+coord = [1512, 392]
 
-# loadtitle = RAW_FILE_DIR + '/LED_test1.avi'
-# savetitle = PROCESSED_FILE_DIR + '/LED_test1.mp4'
+loadtitle = RAW_FILE_DIR + '/WIN_20231018_12_49_30_Pro_M101_1.mp4'
 
-# cut_start = det.get_start_time(loadtitle, coord)
-# tv.edit_video(loadtitle, [cut_start])
+# det.get_crop(loadtitle, coord, True) #creates a test gif to check the crop
+
+cut_start = det.get_start_time(loadtitle, coord)
+tv.edit_video(loadtitle, [cut_start])
 
 '''
-cut multiple vidos
+cut multiple videos
 '''
-coord = [621, 93]
-for f in os.listdir(os.path.join(RAW_FILE_DIR)):
-    path = os.path.join(RAW_FILE_DIR, f)
-    print(path)
-    cut_start = det.get_start_time(path, coord)
-    tv.edit_video(path, [cut_start])
+# coord = [621, 93] #pixel coordinates of the LED in the video
+
+# for f in os.listdir(os.path.join(RAW_FILE_DIR)):
+#     path = os.path.join(RAW_FILE_DIR, f)
+#     print(path)
+#     cut_start = det.get_start_time(path, coord)
+#     tv.edit_video(path, [cut_start])

@@ -17,16 +17,17 @@ def coord_to_colour(frame, coord):
     return pix_sum     
         
 #crops a 20x20 box around the LED
-def get_crop(video_path, coords):
+def get_crop(video_path, coords, save_clip=False):
     
     clip = (mpy.VideoFileClip(video_path)
-         .subclip(t_start=0, t_end=15) #trims video after 15 seconds
+         .subclip(0, 15) #trims video after 15 seconds
          .crop(x_center=coords[0],
                y_center=coords[1],
                width=20,height=20)) 
     
     #save clip as gif
-    # clip.write_gif(PROCESSED_FILE_DIR+"/test.gif")
+    if save_clip:
+        clip.write_gif(PROCESSED_FILE_DIR+"/test.gif")
     return clip
 
 def detect_LED(video):
@@ -47,7 +48,7 @@ def detect_LED(video):
     for t, frame in video.iter_frames(with_times=True):  #returns the frame as H x W index of rbg values
         framecount = framecount + 1
         cut_start = 0.
-        if coord_to_colour(frame, [9,9]) >= 600.: #checks if image is bright enough
+        if coord_to_colour(frame, [9,9]) >= 600.: #checks if LED is on
             print('start time: %s'%t)
             cut_start = t
             break
@@ -60,8 +61,8 @@ def get_start_time(video_path, coord):
     return detect_LED(clip)
 
 if __name__ == '__main__':
-    video_path = RAW_FILE_DIR + '/LED_test1.avi'
-    coord = [621, 93]
+    video_path = RAW_FILE_DIR + '/WIN_20231018_12_49_30_Pro_M101_1.mp4'
+    coord = [1512, 392]
         
     cut_start = get_start_time(video_path, coord)
     
