@@ -16,8 +16,8 @@ Processed videos are in the folder `Videos/ProcessedVids`
 ## Install
 Dependencies: 
 
-'conda install python numpy spyder pyqtwebengine'
+`conda install python numpy spyder pyqtwebengine`
 
-'pip install moviepy'
+`pip install moviepy`
 
 Make sure moviepy version is at least 2.0.0.dev2
