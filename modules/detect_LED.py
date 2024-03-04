@@ -20,7 +20,7 @@ def coord_to_colour(frame, coord):
 def get_crop(video_path, coords, save_clip=False):
     
     clip = (mpy.VideoFileClip(video_path)
-         .subclip(0, 15) #trims video after 15 seconds
+         .subclip(0, 30) #trims video after 15 seconds
          .crop(x_center=coords[0],
                y_center=coords[1],
                width=20,height=20)) 
