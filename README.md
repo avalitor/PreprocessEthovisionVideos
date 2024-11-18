@@ -1,5 +1,5 @@
 # PreprocessEthovisionVideos
-crop videos based on LED signal for tracking in Ethovision
+timestamp videos based on LED signal for tracking in Ethovision
 
 Video files are not stored on Github because of size
 
@@ -11,7 +11,7 @@ Run `trim_vid_LED.py`
 - Get coordinates by opening a screenshot of the video in Paint and mousing over the area of interest
 - I suggest testing the coordinates are correct before running the file by uncommenting the create gif command in get_crop
 
-Processed videos are in the folder `Videos/ProcessedVids`
+Timestamps are stored in a dictionary in the folder `Videos/ProcessedVids`
 
 ## Install
 Dependencies: 

@@ -38,7 +38,7 @@ cut multiple videos
 #     tv.edit_video(path, [cut_start])
 
 '''
-just get start ofset times
+just get start offset times
 '''
    
 offset_dict = defaultdict(dict)
