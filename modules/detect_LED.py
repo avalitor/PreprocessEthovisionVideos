@@ -20,7 +20,7 @@ def coord_to_colour(frame, coord):
 def get_crop(video_path, coords, save_clip=False):
     
     clip = (mpy.VideoFileClip(video_path)
-         .subclip(0, 30) #trims video after 15 seconds
+         .subclip(0, 160) #trims video after 60 seconds (usually 30)
          .crop(x_center=coords[0],
                y_center=coords[1],
                width=20,height=20)) 
@@ -48,7 +48,7 @@ def detect_LED(video):
     for t, frame in video.iter_frames(with_times=True):  #returns the frame as H x W index of rbg values
         framecount = framecount + 1
         cut_start = 0.
-        if coord_to_colour(frame, [9,9]) >= 600.: #checks if LED is on
+        if coord_to_colour(frame, [9,9]) >= 200.: #checks if LED is on, usually 600
             print('start time: %s'%t)
             cut_start = t
             break

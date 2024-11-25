@@ -17,9 +17,9 @@ from collections import defaultdict
 '''
 cut single video
 '''
-# coord = [1512, 392]
-coord = [1508, 379]
-# loadtitle = RAW_FILE_DIR + '/WIN_20240216_17_19_47_Pro_M104_11.mp4'
+coord = [1469, 488]
+# coord = [1513, 383]
+# loadtitle = RAW_FILE_DIR + '/WIN_20241121_12_34_42_Pro_m38_t31.mp4'
 
 # det.get_crop(loadtitle, coord, True) #creates a test gif to check the crop
 
@@ -47,22 +47,22 @@ for f in os.listdir(os.path.join(RAW_FILE_DIR)):
     path = os.path.join(RAW_FILE_DIR, f)
     trial_name = os.path.basename(path).split('_')[-1].split('.')[0]
     mouse_no = os.path.basename(path).split('_')[-2].split('.')[0]
-    print(trial_name)
+    print(mouse_no + " " + trial_name)
     cut_start = det.get_start_time(path, coord)
     # trial_dict[trial_name] = cut_start
     offset_dict[mouse_no][trial_name] = cut_start
     
-mouse_no = 'M105'
+mouse_no = 'm38'
 dict_subset = offset_dict[mouse_no]
 
-#save data
+#save data one mouse at a time (write a loop for this)
 file = open(PROCESSED_FILE_DIR+'/offset_dict_'+mouse_no+'.pydict', 'wb') #opens a writable binary file
 pickle.dump(dict_subset, file) # dump information to that file
 file.close()
 
 # #load data
-# file = open(PROCESSED_FILE_DIR+'/offset_dict.pydict', 'rb')
-# data = pickle.load(file)
-# file.close()
+file = open(PROCESSED_FILE_DIR+'/offset_dict_m35.pydict', 'rb')
+data = pickle.load(file)
+file.close()
 
 
